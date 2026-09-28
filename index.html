@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Dosis para Perros</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        width: 350px;
+        text-align: center;
+    }
+    input {
+        padding: 10px;
+        width: 80%;
+        margin: 15px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    .resultado {
+        margin-top: 20px;
+        text-align: left;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Calculadora de Dosis</h2>
+    <input type="number" id="peso" placeholder="Peso del perro en kg" step="0.1">
+    <br>
+    <button onclick="calcularDosis()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+function calcularDosis() {
+    const peso = parseFloat(document.getElementById("peso").value);
+
+    if (isNaN(peso) || peso <= 0) {
+        document.getElementById("resultado").innerHTML = "Por favor ingresa un peso válido.";
+        return;
+    }
+
+    const dosisPorAplicacion = peso * 0.50;
+    const dosisDiaria = dosisPorAplicacion * 2;
+    const dosisTotal5Dias = dosisDiaria * 5;
+    const frascosNecesarios = Math.ceil(dosisTotal5Dias / 6);
+
+    document.getElementById("resultado").innerHTML = `
+        <p><b>Dosis por una aplicación:</b> ${dosisPorAplicacion.toFixed(2)} ml</p>
+        <p><b>Dosis diaria:</b> ${dosisDiaria.toFixed(2)} ml (se multiplica la dosis por aplicación por dos porque se inyecta dos veces al día)</p>
+        <p><b>Dosis total en 5 días:</b> ${dosisTotal5Dias.toFixed(2)} ml</p>
+        <p><b>Frascos necesarios:</b> ${frascosNecesarios}</p>
+        <p>Este cálculo es para un solo perro</p>
+    `;
+}
+</script>
+
+</body>
+</html> 

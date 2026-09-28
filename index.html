@@ -70,7 +70,7 @@
 
 <script>
 function calcularDosis() {
-    const peso = parseFloat(document.getElementById("peso").value);
+    const peso = Math.round(parseFloat(document.getElementById("peso").value) * 10) / 10;
 
     if (isNaN(peso) || peso <= 0) {
         document.getElementById("resultado").innerHTML = "Por favor ingresa un peso válido.";
@@ -80,7 +80,7 @@ function calcularDosis() {
     const dosisPorAplicacion = peso * 0.50;
     const dosisDiaria = dosisPorAplicacion * 2;
     const dosisTotal5Dias = dosisDiaria * 5;
-    const frascosNecesarios = Math.ceil(dosisTotal5Dias / 6);
+    const frascosNecesarios = Math.ceil(Math.round(dosisTotal5Dias / 6 * 100) / 100);
 
     document.getElementById("resultado").innerHTML = `
         <p><b>Dosis por una aplicación:</b> ${dosisPorAplicacion.toFixed(2)} ml</p>
